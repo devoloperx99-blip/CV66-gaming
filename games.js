@@ -1,4 +1,3 @@
-
 /* =================================
    CV66 GAMING - GAME LOBBY
    Virtual Coin Demo Only
