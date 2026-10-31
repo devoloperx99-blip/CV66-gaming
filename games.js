@@ -1,60 +1,141 @@
 
+/* =================================
+   CV66 GAMING - GAME LOBBY
+   Virtual Coin Demo Only
+================================= */
+
 const games = [
-  {name:"Fortune Gems", type:"Slot", icon:"💎"},
-  {name:"Golden Empire", type:"Slot", icon:"👑"},
-  {name:"Ocean King", type:"Fishing", icon:"🐟"},
-  {name:"Dragon Fishing", type:"Fishing", icon:"🐉"},
-  {name:"Lucky Arcade", type:"Arcade", icon:"🎯"},
-  {name:"Super Bingo", type:"Arcade", icon:"🎮"}
+  {
+    id: 1,
+    name: "Fortune Gems",
+    category: "Slot",
+    icon: "💎",
+    label: "POPULAR"
+  },
+  {
+    id: 2,
+    name: "Golden Empire",
+    category: "Slot",
+    icon: "👑",
+    label: "HOT"
+  },
+  {
+    id: 3,
+    name: "Ocean King",
+    category: "Fishing",
+    icon: "🐟",
+    label: "POPULAR"
+  },
+  {
+    id: 4,
+    name: "Dragon Fishing",
+    category: "Fishing",
+    icon: "🐉",
+    label: "NEW"
+  },
+  {
+    id: 5,
+    name: "Lucky Arcade",
+    category: "Arcade",
+    icon: "🎯",
+    label: "HOT"
+  },
+  {
+    id: 6,
+    name: "Super Bingo",
+    category: "Arcade",
+    icon: "🎮",
+    label: "NEW"
+  },
+  {
+    id: 7,
+    name: "Magic Treasure",
+    category: "Slot",
+    icon: "🪄",
+    label: "NEW"
+  },
+  {
+    id: 8,
+    name: "Happy Fishing",
+    category: "Fishing",
+    icon: "🎣",
+    label: "POPULAR"
+  },
+  {
+    id: 9,
+    name: "Space Adventure",
+    category: "Arcade",
+    icon: "🚀",
+    label: "HOT"
+  }
 ];
 
-const grid = document.getElementById("gameGrid");
+const gameGrid = document.getElementById("gameGrid");
+const searchInput = document.getElementById("search");
 
-function displayGames(list) {
-  grid.innerHTML = "";
+// Display games
+function displayGames(gameList) {
+  if (!gameGrid) return;
 
-  list.forEach(game => {
+  gameGrid.innerHTML = "";
+
+  if (gameList.length === 0) {
+    gameGrid.innerHTML =
+      '<p class="no-games">No games found!</p>';
+    return;
+  }
+
+  gameList.forEach(game => {
     const card = document.createElement("div");
     card.className = "game-card";
 
-    const icon = document.createElement("div");
-    icon.className = "game-icon";
-    icon.textContent = game.icon;
+    card.innerHTML = `
+      <div class="game-icon">${game.icon}</div>
+      <span class="game-label">${game.label}</span>
+      <h3>${game.name}</h3>
+      <p>${game.category} Game</p>
+      <button type="button" class="play-game-btn">
+        ▶ PLAY DEMO
+      </button>
+    `;
 
-    const title = document.createElement("h3");
-    title.textContent = game.name;
+    card.querySelector("button").addEventListener(
+      "click",
+      () => {
+        if (typeof playGame === "function") {
+          playGame(game.name);
+        } else {
+          alert("Game system is loading. Please try again.");
+        }
+      }
+    );
 
-    const type = document.createElement("p");
-    type.textContent = game.type;
-
-    const button = document.createElement("button");
-    button.textContent = "PLAY DEMO";
-    button.onclick = () => playGame(game.name);
-
-    card.append(icon, title, type, button);
-    grid.appendChild(card);
+    gameGrid.appendChild(card);
   });
 }
 
-function filterGames(type) {
-  const result = type === "All"
+// Category filter
+function filterGames(category) {
+  const filtered = category === "All"
     ? games
-    : games.filter(game => game.type === type);
+    : games.filter(game => game.category === category);
 
-  displayGames(result);
+  displayGames(filtered);
 }
 
+// Search games
 function searchGames() {
-  const query = document.getElementById("search")
-    .value.toLowerCase();
+  const query = searchInput.value
+    .trim()
+    .toLowerCase();
 
-  displayGames(games.filter(game =>
-    game.name.toLowerCase().includes(query)
-  ));
+  const filtered = games.filter(game =>
+    game.name.toLowerCase().includes(query) ||
+    game.category.toLowerCase().includes(query)
+  );
+
+  displayGames(filtered);
 }
 
-function playGame(name) {
-  alert(name + " - Demo game coming soon!");
-}
-
+// Initial game lobby
 displayGames(games);
