@@ -1,4 +1,3 @@
-
 // CV66-GAMING - Virtual Coin Demo System
 
 const COIN_KEY = "cv66_coins";
