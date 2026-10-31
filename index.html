@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV66-GAMING | Play & Enjoy</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">CV66<span> GAMING</span></a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#games">Games</a>
+    <a href="#promotions">Promotions</a>
+    <a href="login.html">Login</a>
+  </nav>
+  <div class="balance">🪙 <span id="coins">1000</span></div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <p class="tag">WELCOME TO CV66</p>
+    <h1>PLAY YOUR<br><span>FAVORITE GAMES</span></h1>
+    <p>Discover exciting games and enjoy virtual coin gaming.</p>
+    <a class="play-btn" href="#games">PLAY NOW</a>
+  </section>
+
+  <section id="games">
+    <h2>🎮 JILI GAME LOBBY</h2>
+    <div class="categories">
+      <button onclick="filterGames('All')">All</button>
+      <button onclick="filterGames('Slot')">Slots</button>
+      <button onclick="filterGames('Fishing')">Fishing</button>
+      <button onclick="filterGames('Arcade')">Arcade</button>
+    </div>
+    <input id="search" placeholder="Search your favorite game..." oninput="searchGames()">
+    <div class="game-grid" id="gameGrid"></div>
+  </section>
+
+  <section id="promotions" class="promo">
+    <h2>🎁 Welcome Bonus</h2>
+    <p>Enjoy 1000 free virtual coins in this demo.</p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 CV66-GAMING | Virtual Coin Demo Only</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/games.js"></script>
+</body>
+</html>
